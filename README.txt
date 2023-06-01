@@ -1,4 +1,4 @@
-The Groninger Lightning Plotter (GLP) is a python interactive plotting code for displaying lightning pointsources located in 3D and time. Very heavily inspired by the great work done by New Mexico Tech.
+The Groninger Lightning Plotter (GLP) is a python interactive plotting code for displaying lightning point sources located in 3D and time. Very heavily inspired by the great work done by New Mexico Tech.
 
 The package includes some code to read the LMA format, and my personal format. The LMA format-reading code was written some time ago, and I don't remember it well. So good luck using it!
 
@@ -10,11 +10,11 @@ PyQt5
 
 
 How to use:
-The GLP package is called from a python script. An example is included. Note that if the script that calls GLP (e.g. the attached example) is in the same folder as the GLP folder (NOT inside!), then GLP does not need any kind of installation. For other uses, an install script is included. Since I do not really understand Python package managment, this install script is dead-simple. It simply places a sym-link named 'GLP' in your python library. So that if a script calls "import GLP", then the python interpretor will find the sym-link to the GLP folder.
+The GLP package is called from a python script. An example is included. Note that if the script that calls GLP (e.g. the attached example) is in the same folder as the GLP folder (NOT inside!), then GLP does not need any kind of installation. For other uses, an install script is included. Since I do not really understand Python package management, this install script is dead-simple. It simply places a sym-link named 'GLP' in your python library. So that if a script calls "import GLP", then the python interpreter will find the sym-link to the GLP folder.
 
-Note that GLP works with "datasets", where you can have multiple datasets. A dataset can represent a flash, piece of a flash, locations of the antennas, etc... The kind of datasets is ostensibly easy to extend so that wierd things could be plotted (e.g. maybe radar data if wanted! ), however such extension is probably difficult to anyone note intametnly familour with how GLP works internally.
+Note that GLP works with "datasets", where you can have multiple datasets. A dataset can represent a flash, piece of a flash, locations of the antennas, etc... The kind of datasets is ostensibly easy to extend so that wierd things could be plotted (e.g. maybe radar data if wanted! ), however such extension is probably difficult to anyone note intimately familiar with how GLP works internally.
 
-The included example script opens up a lightning flash, turns it into a dataset, and then plots that dataset. It is relatively easy to turn numpy arrays of X, Y, Z, T source coordinates into a nice data set. The script uses a helper function, "SPSF_to_DataSet"; however this helper function is relatevely simple and (unlike all the other code) I recomend any end user to read this function if they want to plot their own pointsource data that may be in a weird data format.
+The included example script opens up a lightning flash, turns it into a dataset, and then plots that dataset. It is relatively easy to turn numpy arrays of X, Y, Z, T source coordinates into a nice data set. The script uses a helper function, "SPSF_to_DataSet"; however this helper function is relatively simple and (unlike all the other code) I recommend any end user to read this function if they want to plot their own pointsource data that may be in a weird data format.
 
 If you want to run this code, but don't have a nice lightning data set to plot, then please contact me.
 
@@ -40,14 +40,14 @@ The next drop down menu shows various properties of the dataset. The text box sh
 "max points" : maximum number of points to display for speed reasons. If the displayed points exceed this, random points are thrown out until this is met. 
 min/max X:  cuts on the value X to control the quality of the data.
 
-"ignore time" : the dataset is no longer cut on the time bounds. This is useful to comparing lightning phenomina at different times. (e.g. if a negative leader is in one dataset, a dart leader in a second dataset, and you want to see if they overlap in space, but you want to zoom-in to one in time).
+"ignore time" : the dataset is no longer cut on the time bounds. This is useful to comparing lightning phenomena at different times. (e.g. if a negative leader is in one dataset, a dart leader in a second dataset, and you want to see if they overlap in space, but you want to zoom-in to one in time).
 
 "show all time" : expands the time bounds to show all points inside the XYZ bounds and cuts (for this dataset only).
 
 
 Next there are eight boxes, in four pairs, labeled x, y, z , and t. 
 If "set" is clicked, these 8 boxes show the current XYZT bounds (left is min, right is max).
-"to CB" / "from CB" copies the bounds to and from the clipboard. This is for interacting with scipts and saving the thing you are looking at. (format is a text python nested list. Is obvious when you look at it, just paste to a text file).
+"to CB" / "from CB" copies the bounds to and from the clipboard. This is for interacting with scripts and saving the thing you are looking at. (format is a text python nested list. Is obvious when you look at it, just paste to a text file).
 
 "set. pos" : sets the XYZT bounds to those in the above 8 boxes.
 "show all position" : adjusts the XYZT bounds to show all sources. Similar to "show all", but doesn't change the cuts.
@@ -65,7 +65,7 @@ MOUSE:
 
 left button : if clicked and dragged on altitude vs time, or North vs East, then will zoom out/ in (depending on setting on the left). Note, change will only occur once you release the button!
 
-right button : if clicked and dragged on a panel, will translate the bounds approriatly. Note, change will only occur once you release the button!
+right button : if clicked and dragged on a panel, will translate the bounds appropriately. Note, change will only occur once you release the button!
 
 middle button : undoes last action (may need many clicks...)
 
@@ -94,5 +94,4 @@ Analysis:
 About the name:
 
 This package is named as such, since it was originally developed in the Dutch city of Groningen.
-
 
