@@ -255,7 +255,7 @@ class typical_transform( coordinate_transform ):
         return self.X_bounds, self.Y_bounds, self.Z_bounds, self.Z_bounds, self.T_bounds
     
     def get_displayLimits(self):
-        print('displayed coordinates are in m and s')
+        #print('displayed coordinates are in m and s')
         Xout = [self.X_bounds[0]*1000.0+self.space_center[0], 
                 self.X_bounds[1]*1000.0+self.space_center[0]]
         Yout = [self.Y_bounds[0]*1000.0+self.space_center[1], 
@@ -875,7 +875,7 @@ class DataSet_generic_PSE(DataSet_Type):
         self.print_data = print_info
         self.txtOut_info = txtOut_info
         
-        self.max_num_points = 10000
+        self.max_num_points = 20000
         
         self.source_IDs = source_IDs
         if self.source_IDs is None:
@@ -3759,33 +3759,52 @@ class FigureArea(FigureCanvas):
         self.setFocusPolicy( QtCore.Qt.ClickFocus )
         self.setFocus()
         
-        self.fig.subplots_adjust(top=0.97, bottom=0.07)
+        #self.fig.subplots_adjust(top=0.97, bottom=0.07)
         
         #### setup axes. We need TWO grid specs to control heights properly
 
-        self.top_gs = matplotlib.gridspec.GridSpec(4,1, hspace=0.3)
-        self.middle_N_bottom_gs = matplotlib.gridspec.GridSpecFromSubplotSpec(3, 1, subplot_spec =self.top_gs[1:], hspace=0.0, wspace=0.05)
-        self.middle_gs = matplotlib.gridspec.GridSpecFromSubplotSpec(1, 3, subplot_spec =self.middle_N_bottom_gs[0], hspace=0.0, wspace=0.00)
-        self.bottom_gs = matplotlib.gridspec.GridSpecFromSubplotSpec(2, 3, subplot_spec =self.middle_N_bottom_gs[1:], wspace=0.00)
+      #  self.top_gs = matplotlib.gridspec.GridSpec(4,1, hspace=0.3, figure=self.fig)
+      #  self.middle_N_bottom_gs = matplotlib.gridspec.GridSpecFromSubplotSpec(3, 1, subplot_spec =self.top_gs[1:], hspace=0.0, wspace=0.05)
+       # self.middle_gs = matplotlib.gridspec.GridSpecFromSubplotSpec(1, 3, subplot_spec =self.middle_N_bottom_gs[0], hspace=0.0, wspace=0.00)
+       # self.bottom_gs = matplotlib.gridspec.GridSpecFromSubplotSpec(2, 3, subplot_spec =self.middle_N_bottom_gs[1:], wspace=0.00)
+        
+       # self.AltVsT_axes = self.fig.add_subplot(self.top_gs[0])
+        
+       # self.AltVsEw_axes= self.fig.add_subplot(self.middle_gs[0,:2])
+       # self.ancillary_axes = self.fig.add_subplot(self.middle_gs[0,2])
+        
+       # self.NsVsEw_axes = self.fig.add_subplot(self.bottom_gs[0:,:2], sharex=self.AltVsEw_axes)
+       # self.NsVsAlt_axes = self.fig.add_subplot(self.bottom_gs[0:,2], sharey=self.NsVsEw_axes)
+        
+       # self.AltVsT_axes.tick_params(labelsize = self.axis_tick_size)
+        
+        
+        
+        
+        self.top_gs = matplotlib.gridspec.GridSpec(4,1, hspace=0.3, figure=self.fig)
+        #self.middle_N_bottom_gs = matplotlib.gridspec.GridSpecFromSubplotSpec(3, 1, subplot_spec =self.top_gs[1:], hspace=0.0, wspace=0.05)
+        self.under_gs = matplotlib.gridspec.GridSpecFromSubplotSpec(3, 3, subplot_spec =self.top_gs[1:], hspace=0.0, wspace=0.0)
+        #self.middle_gs = matplotlib.gridspec.GridSpecFromSubplotSpec(1, 3, subplot_spec =self.middle_N_bottom_gs[0], hspace=0.0, wspace=0.00)
+        #self.bottom_gs = matplotlib.gridspec.GridSpecFromSubplotSpec(2, 3, subplot_spec =self.middle_N_bottom_gs[1:], wspace=0.00)
         
         self.AltVsT_axes = self.fig.add_subplot(self.top_gs[0])
         
-        self.AltVsEw_axes= self.fig.add_subplot(self.middle_gs[0,:2])
-        self.ancillary_axes = self.fig.add_subplot(self.middle_gs[0,2])
+        self.AltVsEw_axes= self.fig.add_subplot(self.under_gs[0,:2])
+        self.ancillary_axes = self.fig.add_subplot(self.under_gs[0,2])
         
-        self.NsVsEw_axes = self.fig.add_subplot(self.bottom_gs[0:,:2])
-        self.NsVsAlt_axes = self.fig.add_subplot(self.bottom_gs[0:,2])
+        self.NsVsEw_axes = self.fig.add_subplot(self.under_gs[1:,:2], sharex=self.AltVsEw_axes)
+        self.NsVsAlt_axes = self.fig.add_subplot(self.under_gs[1:,2], sharey=self.NsVsEw_axes)
+        
+        
+        
         
         self.AltVsT_axes.tick_params(labelsize = self.axis_tick_size)
         
-        
         self.AltVsEw_axes.tick_params(labelsize = self.axis_tick_size, top=True,right=True, labelbottom=False, direction='in')
-#        self.AltVsEw_axes.get_xaxis().set_visible(False)
         
         self.NsVsEw_axes.tick_params(labelsize = self.axis_tick_size, top=True,right=True, direction='in')
         
         self.NsVsAlt_axes.tick_params(labelsize = self.axis_tick_size, top=True,right=True, labelleft=False, direction='in')
-#        self.NsVsAlt_axes.get_yaxis().set_visible(False)
         
         self.ancillary_axes.get_yaxis().set_visible(False)
         self.ancillary_axes.tick_params(labelsize = self.axis_tick_size)
